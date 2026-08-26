@@ -66,7 +66,7 @@ Ver `ARQUITECTURA.pdf` y `diagrma_flujo.jpeg` para el diagrama de contenedores y
 
 - **Swagger** de cada microservicio: `http://localhost:<puerto>/swagger-ui/index.html`
 - [`PlazaComidas.postman_collection.json`](./PlazaComidas.postman_collection.json) — colección de Postman con el flujo completo de punta a punta (login, creación de cuentas, restaurante, platos, pedido, asignación, entrega, cancelación, trazabilidad y eficiencia), con captura automática de tokens e ids entre requests.
-- [`Estudio.html`](./Estudio.html) — guía de repaso de arquitectura, decisiones de diseño y patrones usados en el proyecto.
+- [**Guía de sustentación**](https://plaza-comidas-microservices.github.io/documentation/) (`index.html`, servido con GitHub Pages) — repaso de arquitectura, decisiones de diseño y patrones usados en el proyecto.
 
 ## Convenciones de trabajo
 
