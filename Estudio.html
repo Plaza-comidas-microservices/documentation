@@ -1,0 +1,762 @@
+<title>Guía de Sustentación</title>
+<style>
+  :root {
+    --bg: #F5F3EE;
+    --surface: #FFFFFF;
+    --surface-2: #ECE8DE;
+    --ink: #1B2027;
+    --ink-soft: #40474F;
+    --muted: #6B7280;
+    --border: #DAD4C5;
+    --accent: #2F6F6A;
+    --accent-strong: #1F5551;
+    --accent-soft: #DEEBE8;
+    --accent2: #B4622E;
+    --accent2-soft: #F3E2CE;
+    --code-bg: #1E242B;
+    --code-ink: #E6E1D6;
+    --code-muted: #8C97A0;
+    --code-accent: #7FD1C4;
+    --code-accent2: #E3A46B;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #12161B;
+      --surface: #181D24;
+      --surface-2: #1E252C;
+      --ink: #EDEAE2;
+      --ink-soft: #C8C2B4;
+      --muted: #8A93A0;
+      --border: #2A323B;
+      --accent: #5FBDB4;
+      --accent-strong: #7FD1C4;
+      --accent-soft: #1D3634;
+      --accent2: #E3A46B;
+      --accent2-soft: #3A2A1C;
+      --code-bg: #0D1013;
+      --code-ink: #E6E1D6;
+      --code-muted: #7B8590;
+      --code-accent: #7FD1C4;
+      --code-accent2: #E3A46B;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #12161B;
+    --surface: #181D24;
+    --surface-2: #1E252C;
+    --ink: #EDEAE2;
+    --ink-soft: #C8C2B4;
+    --muted: #8A93A0;
+    --border: #2A323B;
+    --accent: #5FBDB4;
+    --accent-strong: #7FD1C4;
+    --accent-soft: #1D3634;
+    --accent2: #E3A46B;
+    --accent2-soft: #3A2A1C;
+    --code-bg: #0D1013;
+    --code-ink: #E6E1D6;
+    --code-muted: #7B8590;
+    --code-accent: #7FD1C4;
+    --code-accent2: #E3A46B;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Work Sans", "Segoe UI", system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  h1, h2, h3 {
+    font-family: "Spectral", Georgia, "Times New Roman", serif;
+    color: var(--ink);
+    text-wrap: balance;
+    font-weight: 600;
+  }
+
+  code, pre, .mono {
+    font-family: "IBM Plex Mono", "Cascadia Code", Consolas, monospace;
+  }
+
+  a { color: var(--accent-strong); }
+  a:focus-visible, button:focus-visible, summary:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .shell {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 6rem;
+    display: grid;
+    grid-template-columns: 240px minmax(0, 1fr);
+    gap: 3rem;
+    align-items: start;
+  }
+
+  /* ---------- Header ---------- */
+  .masthead {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 1.5rem;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .masthead .eyebrow {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 0.5rem;
+  }
+
+  .masthead h1 {
+    margin: 0;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    line-height: 1.15;
+  }
+
+  .masthead .sub {
+    color: var(--muted);
+    max-width: 46ch;
+    margin: 0.6rem 0 0;
+    font-size: 0.98rem;
+  }
+
+  .stack-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .pill {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.76rem;
+    letter-spacing: 0.02em;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--ink-soft);
+    padding: 0.32rem 0.65rem;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+
+  /* ---------- Nav ---------- */
+  nav.toc {
+    position: sticky;
+    top: 1.5rem;
+    align-self: start;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    font-size: 0.88rem;
+  }
+
+  nav.toc .toc-label {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin-bottom: 0.6rem;
+  }
+
+  nav.toc a {
+    text-decoration: none;
+    color: var(--ink-soft);
+    padding: 0.4rem 0.6rem;
+    border-radius: 6px;
+    border-left: 2px solid transparent;
+  }
+
+  nav.toc a:hover {
+    background: var(--surface-2);
+    color: var(--ink);
+  }
+
+  nav.toc a.q {
+    margin-top: 0.8rem;
+    border-top: 1px solid var(--border);
+    padding-top: 0.8rem;
+    color: var(--accent-strong);
+    font-weight: 600;
+  }
+
+  /* ---------- Main content ---------- */
+  main {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  section {
+    scroll-margin-top: 1.5rem;
+  }
+
+  .kicker {
+    display: flex;
+    align-items: baseline;
+    gap: 0.7rem;
+    margin-bottom: 0.9rem;
+  }
+
+  .kicker .num {
+    font-family: "IBM Plex Mono", monospace;
+    color: var(--accent);
+    font-size: 0.95rem;
+  }
+
+  section h2 {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+
+  section > p.lede {
+    color: var(--ink-soft);
+    max-width: 68ch;
+    margin: 0 0 1.2rem;
+  }
+
+  .prose { max-width: 68ch; }
+  .prose p { margin: 0 0 0.9rem; }
+  .prose ul, .prose ol { margin: 0 0 0.9rem; padding-left: 1.3rem; }
+  .prose li { margin-bottom: 0.5rem; }
+  .prose strong { color: var(--ink); }
+
+  code.inline {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.1rem 0.35rem;
+    font-size: 0.88em;
+    color: var(--accent-strong);
+  }
+
+  pre.code {
+    background: var(--code-bg);
+    color: var(--code-ink);
+    border-radius: 10px;
+    padding: 1rem 1.2rem;
+    overflow-x: auto;
+    font-size: 0.85rem;
+    line-height: 1.55;
+    margin: 0 0 1.1rem;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+
+  pre.code .kw { color: var(--code-accent2); }
+  pre.code .fn { color: var(--code-accent); }
+  pre.code .mut { color: var(--code-muted); }
+
+  /* Layer diagram */
+  .layers {
+    display: grid;
+    gap: 0.7rem;
+    margin: 1.4rem 0 1.8rem;
+  }
+
+  .layer {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem;
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    gap: 1rem;
+    align-items: start;
+  }
+
+  .layer.app { border-left-color: var(--accent2); }
+  .layer.infra { border-left-color: var(--muted); }
+
+  .layer .name {
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--ink);
+  }
+
+  .layer .name small {
+    display: block;
+    font-weight: 400;
+    color: var(--muted);
+    font-size: 0.74rem;
+    margin-top: 0.2rem;
+  }
+
+  .layer .desc { color: var(--ink-soft); font-size: 0.92rem; }
+  .layer .desc code { font-size: 0.85em; }
+
+  .layer-group-label {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin: 1.4rem 0 0.5rem;
+  }
+  .layer-group-label:first-child { margin-top: 0; }
+
+  /* Decision cards */
+  .decisions {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+
+  .decision {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.1rem 1.2rem;
+  }
+
+  .decision h3 {
+    font-size: 1rem;
+    margin: 0 0 0.5rem;
+    font-family: "Work Sans", sans-serif;
+    font-weight: 600;
+  }
+
+  .decision p { margin: 0; color: var(--ink-soft); font-size: 0.92rem; }
+  .decision .why {
+    margin-top: 0.6rem;
+    font-size: 0.85rem;
+    color: var(--accent-strong);
+  }
+
+  /* Definition rows (Mockito) */
+  .defs { display: grid; gap: 0.9rem; }
+  .def {
+    display: grid;
+    grid-template-columns: 190px 1fr;
+    gap: 1rem;
+    align-items: start;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.9rem;
+  }
+  .def:last-child { border-bottom: none; }
+  .def dt {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.85rem;
+    color: var(--accent-strong);
+    font-weight: 600;
+  }
+  .def dd { margin: 0; color: var(--ink-soft); font-size: 0.92rem; }
+
+  /* HU14 timeline */
+  .timeline {
+    display: grid;
+    gap: 0;
+    border-left: 2px solid var(--border);
+    margin-left: 0.5rem;
+    padding-left: 1.4rem;
+  }
+  .tl-item { position: relative; padding-bottom: 1.4rem; }
+  .tl-item:last-child { padding-bottom: 0; }
+  .tl-item::before {
+    content: "";
+    position: absolute;
+    left: -1.62rem;
+    top: 0.3rem;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--bg);
+  }
+  .tl-item h3 { margin: 0 0 0.3rem; font-size: 1rem; font-family: "Work Sans"; font-weight: 600; }
+  .tl-item p { margin: 0; color: var(--ink-soft); font-size: 0.92rem; }
+
+  /* Callout */
+  .callout {
+    background: var(--accent2-soft);
+    border: 1px solid var(--accent2);
+    border-radius: 10px;
+    padding: 1rem 1.2rem;
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+    margin: 1rem 0;
+  }
+  .callout strong { color: var(--ink); }
+
+  /* Patterns grid */
+  .grid-2 {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  }
+  .tile {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.15rem;
+  }
+  .tile h3 {
+    font-family: "Work Sans"; font-weight: 600; font-size: 0.98rem;
+    margin: 0 0 0.4rem;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .tile .tag {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.68rem;
+    background: var(--accent-soft);
+    color: var(--accent-strong);
+    padding: 0.15rem 0.45rem;
+    border-radius: 5px;
+  }
+  .tile p { margin: 0; color: var(--ink-soft); font-size: 0.9rem; }
+
+  /* Quick reference */
+  table.ref {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+  }
+  table.ref th, table.ref td {
+    text-align: left;
+    padding: 0.6rem 0.7rem;
+    border-bottom: 1px solid var(--border);
+  }
+  table.ref th {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+  }
+  table.ref td.mono { font-family: "IBM Plex Mono", monospace; font-size: 0.82rem; color: var(--ink-soft); }
+  .ref-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px; background: var(--surface); }
+  .ref-wrap table.ref { min-width: 640px; }
+
+  footer.page {
+    grid-column: 1 / -1;
+    border-top: 1px solid var(--border);
+    margin-top: 1rem;
+    padding-top: 1.4rem;
+    color: var(--muted);
+    font-size: 0.82rem;
+  }
+
+  @media (max-width: 860px) {
+    .shell { grid-template-columns: 1fr; }
+    nav.toc {
+      position: static;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+    nav.toc .toc-label { display: none; }
+    nav.toc a.q { margin-top: 0; border-top: none; padding-top: 0.4rem; }
+    .layer { grid-template-columns: 1fr; }
+    .def { grid-template-columns: 1fr; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+</style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@500;600;700&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<div class="shell">
+
+  <header class="masthead">
+    <div>
+      <p class="eyebrow">Plazoleta de microservicios · Pragma</p>
+      <h1>Plaza de Comidas — Guía de repaso</h1>
+      <p class="sub">Arquitectura, decisiones y por qués detrás de los 4 microservicios.</p>
+    </div>
+    <div class="stack-pills">
+      <span class="pill">users · 8081</span>
+      <span class="pill">mall · 8082</span>
+      <span class="pill">messaging · 8083</span>
+      <span class="pill">traceability · 8084</span>
+    </div>
+  </header>
+
+  <nav class="toc">
+    <p class="toc-label">En esta guía</p>
+    <a href="#capas">1. Capas de la arquitectura</a>
+    <a href="#decisiones">2. Decisiones de diseño</a>
+    <a href="#mockito">3. Qué es Mockito</a>
+    <a href="#hu14">4. HU14 a fondo</a>
+    <a href="#paradigmas">5. Paradigmas usados</a>
+    <a href="#patrones">6. Patrones de diseño</a>
+    <a href="#reutilizacion">7. Reutilización</a>
+    <a href="#excepciones">8. Excepciones controladas</a>
+    <a href="#eficiencia">9. UseCase de eficiencia</a>
+    <a href="#accesos" class="q">Accesos rápidos →</a>
+  </nav>
+
+  <main>
+
+    <section id="capas">
+      <div class="kicker"><span class="num">01</span><h2>Responsabilidad de cada capa</h2></div>
+      <p class="lede">Arquitectura hexagonal (puertos y adaptadores). Regla de oro: <code class="inline">domain/</code> nunca importa nada de Spring, JPA o Mongo — ni una sola anotación de framework.</p>
+
+      <p class="layer-group-label">domain/</p>
+      <div class="layers">
+        <div class="layer">
+          <div class="name">model<small>POJOs</small></div>
+          <div class="desc">Objetos puros del negocio (<code class="inline">OrderModel</code>, <code class="inline">RestaurantModel</code>). Sin <code class="inline">@Entity</code>, sin <code class="inline">@Document</code>, sin nada que dependa de cómo se guardan.</div>
+        </div>
+        <div class="layer">
+          <div class="name">api<small>puerto de entrada</small></div>
+          <div class="desc">Interfaces que el dominio <strong>expone</strong> hacia afuera (<code class="inline">IOrderServicePort</code>). La aplicación las llama; nunca al revés.</div>
+        </div>
+        <div class="layer">
+          <div class="name">spi<small>puerto de salida</small></div>
+          <div class="desc">Interfaces que el dominio <strong>necesita</strong> del exterior (<code class="inline">IOrderPersistencePort</code>, <code class="inline">ITraceabilityPort</code>). El dominio las declara, pero no sabe quién las implementa.</div>
+        </div>
+        <div class="layer">
+          <div class="name">usecase<small>lógica real</small></div>
+          <div class="desc">Donde vive la regla de negocio de verdad (<code class="inline">OrderUseCase</code>, <code class="inline">EfficiencyUseCase</code>). Implementa <code class="inline">api</code>, consume <code class="inline">spi</code>.</div>
+        </div>
+      </div>
+
+      <p class="layer-group-label">application/</p>
+      <div class="layers">
+        <div class="layer app">
+          <div class="name">dto<small>request/response</small></div>
+          <div class="desc">Contrato HTTP — un DTO por operación, nunca compartido entre endpoints aunque se parezcan.</div>
+        </div>
+        <div class="layer app">
+          <div class="name">mapper<small>MapStruct</small></div>
+          <div class="desc">Traduce DTO ⇄ Model sin código repetitivo de copiar campo por campo.</div>
+        </div>
+        <div class="layer app">
+          <div class="name">handler<small>pegamento</small></div>
+          <div class="desc">Orquesta: DTO → Model → <code class="inline">usecase</code> → Model → DTO. Es la única capa que conoce tanto el mundo HTTP como el dominio.</div>
+        </div>
+      </div>
+
+      <p class="layer-group-label">infrastructure/</p>
+      <div class="layers">
+        <div class="layer infra">
+          <div class="name">input/rest<small>controllers</small></div>
+          <div class="desc">Recibe HTTP, Swagger, extrae el usuario autenticado del JWT vía <code class="inline">SecurityContextHolder</code>.</div>
+        </div>
+        <div class="layer infra">
+          <div class="name">out/jpa · out/mongo<small>persistencia</small></div>
+          <div class="desc">Implementación concreta de un puerto <code class="inline">spi</code> contra MySQL o Mongo — entidad/documento + repositorio + mapper + adapter.</div>
+        </div>
+        <div class="layer infra">
+          <div class="name">out/restcomsumer<small>llamadas salientes</small></div>
+          <div class="desc">Implementación de un puerto <code class="inline">spi</code> que llama a <strong>otro microservicio</strong> vía <code class="inline">RestTemplate</code>.</div>
+        </div>
+        <div class="layer infra">
+          <div class="name">security<small>propio de cada repo</small></div>
+          <div class="desc"><code class="inline">JwtValidator</code> / <code class="inline">JwtAuthenticationFilter</code> / <code class="inline">SecurityConfiguration</code> — cada microservicio valida el JWT por su cuenta.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="decisiones">
+      <div class="kicker"><span class="num">02</span><h2>Decisiones de diseño clave</h2></div>
+      <p class="lede">Las que un evaluador probablemente va a preguntar "¿por qué lo hicieron así?".</p>
+      <div class="decisions">
+        <div class="decision">
+          <h3><code class="inline">restaurantId</code> embebido en el JWT</h3>
+          <p>Se agrega en el login del empleado, en vez de que <code class="inline">mall</code> le pregunte a <code class="inline">users</code> en cada request.</p>
+          <p class="why">Por qué: evita una llamada de red extra por petición; el dato no cambia durante la vida del token.</p>
+        </div>
+        <div class="decision">
+          <h3>Sin tabla de "Roles"</h3>
+          <p>Los roles son un <em>string</em> fijo (ADMIN/OWNER/EMPLOYEE/CLIENT), no una entidad administrable.</p>
+          <p class="why">Por qué: no hay requerimiento de administrarlos en caliente — agregar la tabla sería complejidad sin necesidad real (YAGNI).</p>
+        </div>
+        <div class="decision">
+          <h3>El PIN vive en <code class="inline">mall</code>, no en <code class="inline">messaging</code></h3>
+          <p>Se genera y persiste junto al pedido, y <code class="inline">messaging</code> solo recibe un texto ya armado para enviar.</p>
+          <p class="why">Por qué: <code class="inline">mall</code> es dueño del ciclo de vida del pedido; HU15 necesita validar el PIN ahí mismo.</p>
+        </div>
+        <div class="decision">
+          <h3>Bloqueante vs. no bloqueante</h3>
+          <p>HU14 (SMS) y HU18 (tiempos) <strong>sí</strong> bloquean si fallan. HU17 (logging de trazabilidad) <strong>no</strong> bloquea.</p>
+          <p class="why">Por qué: sin el SMS o los tiempos, la operación no tiene sentido; trazabilidad solo observa, nunca debe tumbar el flujo de negocio.</p>
+        </div>
+        <div class="decision">
+          <h3>MongoDB para Trazabilidad</h3>
+          <p>Los logs de cambio de estado son de solo-escritura (append), sin relaciones, sin esquema que migrar.</p>
+          <p class="why">Por qué: encajan mejor como documentos que como filas relacionales — no hay JOIN que hacer nunca.</p>
+        </div>
+        <div class="decision">
+          <h3>Doble adapter de SMS por perfil</h3>
+          <p><code class="inline">TwilioSmsAdapter</code> (real) y <code class="inline">LogSmsAdapter</code> (simulado), intercambiables con <code class="inline">SPRING_PROFILES_ACTIVE=log</code>.</p>
+          <p class="why">Por qué: poder demostrar el flujo completo sin depender de saldo/restricciones de una cuenta trial de Twilio el día de la sustentación.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="mockito">
+      <div class="kicker"><span class="num">03</span><h2>¿Qué es Mockito?</h2></div>
+      <p class="lede">Librería de testing que crea "dobles" de las dependencias de una clase, para probarla aislada sin tocar MySQL, Mongo o Twilio de verdad.</p>
+      <dl class="defs">
+        <div class="def">
+          <dt>@Mock</dt>
+          <dd>Crea el doble de una dependencia (ej. <code class="inline">@Mock IOrderPersistencePort orderPersistencePort</code>) — un objeto falso que se comporta como tú le digas.</dd>
+        </div>
+        <div class="def">
+          <dt>@ExtendWith(MockitoExtension.class)</dt>
+          <dd>Activa Mockito dentro de un test de JUnit 5 — sin esto, las anotaciones <code class="inline">@Mock</code> no hacen nada.</dd>
+        </div>
+        <div class="def">
+          <dt>when(...).thenReturn(...)</dt>
+          <dd>"Cuando le pidan esto, respondé esto" — define qué devuelve el mock ante una llamada puntual.</dd>
+        </div>
+        <div class="def">
+          <dt>verify(mock, times(n))</dt>
+          <dd>Confirma que un método sí (o nunca) se llamó, y cuántas veces — clave para métodos <code class="inline">void</code> donde no hay valor de retorno que comprobar (ej. <code class="inline">logStatusChange</code>).</dd>
+        </div>
+        <div class="def">
+          <dt>doThrow(...).when(mock)...</dt>
+          <dd>Hace que el mock lance una excepción en vez de responder normal — para probar los caminos tristes (ej. "Twilio no responde").</dd>
+        </div>
+      </dl>
+      <div class="callout"><strong>En una frase:</strong> Mockito te deja probar <code class="inline">OrderUseCase.markOrderAsReady</code> sin un <code class="inline">mall</code> real corriendo, sin base de datos, sin Twilio — solo con actores de utilería que responden exactamente lo que ese escenario necesita.</div>
+    </section>
+
+    <section id="hu14">
+      <div class="kicker"><span class="num">04</span><h2>HU14 a fondo — la más difícil</h2></div>
+      <p class="lede">No fue la más difícil por la lógica de negocio (es simple), sino por todo lo nuevo que trajo de una sola vez.</p>
+      <div class="timeline">
+        <div class="tl-item">
+          <h3>Microservicio nuevo desde cero</h3>
+          <p>Primera vez armando <code class="inline">messaging-microservice</code> desde el arquetipo: renombrar el paquete, decidir qué boilerplate botar (JPA no aplicaba, no hay persistencia).</p>
+        </div>
+        <div class="tl-item">
+          <h3>Primera integración externa real</h3>
+          <p>Twilio trajo fricción que ninguna documentación anticipa: cuentas trial que restringen SMS de texto libre hacia números de Colombia.</p>
+        </div>
+        <div class="tl-item">
+          <h3>Orquestación de 3 microservicios en una sola operación</h3>
+          <p><code class="inline">mall</code> le pide el teléfono a <code class="inline">users</code>, genera el PIN, le pide a <code class="inline">messaging</code> que envíe el SMS — y solo si todo eso sale bien, persiste el nuevo estado del pedido.</p>
+        </div>
+        <div class="tl-item">
+          <h3>La primera decisión "todo o nada"</h3>
+          <p>Se estableció el patrón de no dejar el pedido a medias si una llamada externa falla — el mismo criterio que luego se <em>invirtió</em> a propósito en HU17.</p>
+        </div>
+        <div class="tl-item">
+          <h3>Plan B para el día de hoy</h3>
+          <p><code class="inline">LogSmsAdapter</code> nació de esta HU, pero terminó siendo la salida que permite demostrar todo el flujo sin depender de que Twilio tenga saldo justo hoy.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="paradigmas">
+      <div class="kicker"><span class="num">05</span><h2>Paradigmas usados</h2></div>
+      <div class="prose">
+        <p><strong>Orientado a objetos</strong> — encapsulación (modelos con getters/setters controlados, nunca campos públicos) y polimorfismo (los puertos <code class="inline">api</code>/<code class="inline">spi</code> son interfaces con implementaciones intercambiables: JPA vs. Mongo vs. REST, Twilio vs. Log).</p>
+        <p><strong>Funcional (parcial)</strong> — en <code class="inline">EfficiencyUseCase</code> y <code class="inline">TraceabilityUseCase</code> se usan Streams de Java (<code class="inline">groupingBy</code>, <code class="inline">mapping</code>, <code class="inline">collect</code>) para agrupar y agregar datos, en vez de loops imperativos con listas mutables.</p>
+        <p><strong>Declarativo</strong> — <code class="inline">SecurityConfiguration</code> describe <em>qué</em> debe pasar con cada ruta/rol, no <em>cómo</em> verificarlo paso a paso.</p>
+      </div>
+    </section>
+
+    <section id="patrones">
+      <div class="kicker"><span class="num">06</span><h2>Patrones de diseño</h2></div>
+      <div class="grid-2">
+        <div class="tile"><h3>Hexagonal <span class="tag">arquitectura</span></h3><p>El patrón "paraguas" de los 4 repos — puertos y adaptadores.</p></div>
+        <div class="tile"><h3>Adapter <span class="tag">infra</span></h3><p>Cada <code class="inline">XxxJpaAdapter</code>/<code class="inline">XxxMongoAdapter</code>/<code class="inline">XxxRestConsumerAdapter</code> traduce entre el mundo externo y el modelo de dominio.</p></div>
+        <div class="tile"><h3>Strategy <span class="tag">vía @Profile</span></h3><p><code class="inline">TwilioSmsAdapter</code>/<code class="inline">LogSmsAdapter</code>: dos formas de "mandar un SMS", elegidas en arranque sin tocar quien las usa.</p></div>
+        <div class="tile"><h3>Dependency Injection <span class="tag">constructor</span></h3><p>Todo se inyecta por constructor (Spring o a mano en <code class="inline">BeanConfiguration</code>) — nunca un <code class="inline">new</code> dentro del dominio.</p></div>
+        <div class="tile"><h3>DTO <span class="tag">application</span></h3><p>Un DTO de request/response por operación, nunca reutilizado entre endpoints.</p></div>
+        <div class="tile"><h3>Mapper <span class="tag">MapStruct</span></h3><p>Traduce entre capas sin código repetitivo de copiar campo por campo.</p></div>
+        <div class="tile"><h3>Repository <span class="tag">Spring Data</span></h3><p><code class="inline">IXxxRepository</code>/<code class="inline">IXxxMongoRepository</code> extendiendo <code class="inline">JpaRepository</code>/<code class="inline">MongoRepository</code>.</p></div>
+      </div>
+    </section>
+
+    <section id="reutilizacion">
+      <div class="kicker"><span class="num">07</span><h2>Cómo se logró reutilización</h2></div>
+      <div class="prose">
+        <ul>
+          <li>Los puertos desacoplan el <em>qué</em> del <em>cómo</em>: <code class="inline">OrderUseCase</code> funcionaría igual si mañana se cambia MySQL por otra base — solo depende de una interfaz.</li>
+          <li><code class="inline">getOwnerById</code> en <code class="inline">users-microservice</code> se reutilizó tal cual para resolver "dame el contacto de un cliente" en HU14 — trade-off consciente de nombre poco alineado a cambio de no duplicar lógica idéntica.</li>
+          <li>El patrón <code class="inline">RestConsumerAdapter</code> (<code class="inline">RestTemplate</code> + <code class="inline">@Value</code> + <code class="inline">try/catch</code>) se repite igual en los 3 microservicios que necesitan hablarle a otro — mismo molde, coherente en todo el proyecto.</li>
+          <li>El trío <code class="inline">JwtValidator</code>/<code class="inline">JwtAuthenticationFilter</code>/<code class="inline">SecurityConfiguration</code> se replicó <strong>a propósito por copia</strong> (no una librería compartida) en <code class="inline">mall</code>, <code class="inline">users</code> y <code class="inline">traceability</code> — cada microservicio debe poder desplegarse y evolucionar sin depender de una dependencia común.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="excepciones">
+      <div class="kicker"><span class="num">08</span><h2>Cómo se previenen excepciones no controladas</h2></div>
+      <div class="prose">
+        <ul>
+          <li>Una sola excepción de negocio (<code class="inline">DomainException</code>) por microservicio, capturada por un <code class="inline">ControllerAdvisor</code> que la traduce a un <code class="inline">400</code> con <code class="inline">{ "message": "..." }</code> — el cliente nunca ve un stack trace crudo.</li>
+          <li>Toda validación ocurre al <strong>inicio</strong> del método del <code class="inline">usecase</code>, antes de cualquier efecto secundario — si algo no es válido, se corta ahí (fail fast), nunca a medias.</li>
+          <li>Las llamadas externas (<code class="inline">RestTemplate</code>) están en <code class="inline">try/catch</code> que traducen la excepción técnica (<code class="inline">RestClientException</code>, etc.) a un <code class="inline">DomainException</code> con mensaje en español — nunca se escapa una excepción de infraestructura al controller.</li>
+          <li>Comparaciones defensivas contra <code class="inline">null</code>:</li>
+        </ul>
+        <pre class="code"><span class="mut">// evita NullPointerException si securityPin llega nulo</span>
+<span class="kw">if</span> (securityPin == <span class="kw">null</span> || !securityPin.equals(order.getSecurityPin())) { ... }
+
+<span class="mut">// cortocircuito: evalúa null antes que .isEmpty()</span>
+<span class="kw">if</span> (list == <span class="kw">null</span> || list.isEmpty()) { ... }</pre>
+      </div>
+    </section>
+
+    <section id="eficiencia">
+      <div class="kicker"><span class="num">09</span><h2>Por qué un UseCase aparte para eficiencia</h2></div>
+      <div class="prose">
+        <p><strong>Responsabilidad única.</strong> <code class="inline">OrderUseCase</code> ya es dueño del ciclo de vida completo del pedido — 5 operaciones que <em>mutan</em> estado (crear, asignar, listo, entregar, cancelar). <code class="inline">EfficiencyUseCase</code> es puramente de <em>lectura</em>: no cambia nada, solo consulta y calcula.</p>
+        <p><strong>Semántica de fallo distinta.</strong> Si trazabilidad falla al <em>loguear</em> (HU17), el pedido sigue su curso. Si trazabilidad falla al <em>responder los tiempos</em> para el reporte (HU18), no hay reporte que mostrar. Son dos contratos de confiabilidad distintos — mezclarlos en la misma clase sería confuso.</p>
+        <p><strong>Más fácil de testear y de hacer crecer.</strong> Aislado, se prueba con mocks más simples (sin arrastrar toda la maquinaria de PIN/SMS), y si mañana se agrega otro reporte, ese crecimiento no ensucia la clase que de verdad importa para que un pedido funcione.</p>
+      </div>
+    </section>
+
+    <section id="accesos">
+      <div class="kicker"><span class="num">→</span><h2>Accesos rápidos</h2></div>
+      <p class="lede">Con los 4 microservicios corriendo. Los reportes de test son archivos locales — pégalos en la barra de direcciones del navegador, no son links en línea.</p>
+
+      <p class="layer-group-label">Swagger UI</p>
+      <div class="ref-wrap">
+        <table class="ref">
+          <thead><tr><th>Microservicio</th><th>URL</th></tr></thead>
+          <tbody>
+            <tr><td>users</td><td class="mono">http://localhost:8081/swagger-ui/index.html</td></tr>
+            <tr><td>mall</td><td class="mono">http://localhost:8082/swagger-ui/index.html</td></tr>
+            <tr><td>messaging</td><td class="mono">http://localhost:8083/swagger-ui/index.html</td></tr>
+            <tr><td>traceability</td><td class="mono">http://localhost:8084/swagger-ui/index.html</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="layer-group-label">Reportes de test (tras <code class="inline">./gradlew test</code>)</p>
+      <div class="ref-wrap">
+        <table class="ref">
+          <thead><tr><th>Microservicio</th><th>Ruta local</th></tr></thead>
+          <tbody>
+            <tr><td>mall</td><td class="mono">C:\Users\daron.mercado_pragma\Desktop\Retos\Plaza_comidas\mall-microservice\build\reports\tests\test\index.html</td></tr>
+            <tr><td>users</td><td class="mono">C:\Users\daron.mercado_pragma\Desktop\Retos\Plaza_comidas\users-microservice\build\reports\tests\test\index.html</td></tr>
+            <tr><td>messaging</td><td class="mono">C:\Users\daron.mercado_pragma\Desktop\Retos\Plaza_comidas\messaging-microservice\build\reports\tests\test\index.html</td></tr>
+            <tr><td>traceability</td><td class="mono">C:\Users\daron.mercado_pragma\Desktop\Retos\Plaza_comidas\traceability-microservice\build\reports\tests\test\index.html</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="page">
+    Plaza de Comidas — Pragma PowerUp · HU1–HU18 · 4 microservicios (users, mall, messaging, traceability)
+  </footer>
+
+</div>

@@ -1,0 +1,286 @@
+{
+  "info": {
+    "name": "Plaza de Comidas - PowerUp",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "usersBaseUrl", "value": "http://localhost:8081" },
+    { "key": "mallBaseUrl", "value": "http://localhost:8082" },
+    { "key": "messagingBaseUrl", "value": "http://localhost:8083" },
+    { "key": "traceabilityBaseUrl", "value": "http://localhost:8084" },
+    { "key": "adminEmail", "value": "" },
+    { "key": "adminPassword", "value": "" },
+    { "key": "ownerEmail", "value": "" },
+    { "key": "ownerPassword", "value": "" },
+    { "key": "employeeEmail", "value": "" },
+    { "key": "employeePassword", "value": "" },
+    { "key": "clientEmail", "value": "" },
+    { "key": "clientPassword", "value": "" },
+    { "key": "adminToken", "value": "" },
+    { "key": "ownerToken", "value": "" },
+    { "key": "employeeToken", "value": "" },
+    { "key": "clientToken", "value": "" },
+    { "key": "ownerId", "value": "" },
+    { "key": "restaurantId", "value": "" },
+    { "key": "plateId", "value": "" },
+    { "key": "orderId", "value": "" },
+    { "key": "securityPin", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "1. Users - Auth",
+      "item": [
+        {
+          "name": "Login Admin",
+          "event": [{ "listen": "test", "script": { "exec": [
+            "const res = pm.response.json();",
+            "if (res.token) { pm.collectionVariables.set('adminToken', res.token); }"
+          ]}}],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{usersBaseUrl}}/api/v1/auth/login",
+            "body": { "mode": "raw", "raw": "{\n  \"email\": \"{{adminEmail}}\",\n  \"password\": \"{{adminPassword}}\"\n}" }
+          }
+        },
+        {
+          "name": "Login Owner",
+          "event": [{ "listen": "test", "script": { "exec": [
+            "const res = pm.response.json();",
+            "if (res.token) { pm.collectionVariables.set('ownerToken', res.token); }"
+          ]}}],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{usersBaseUrl}}/api/v1/auth/login",
+            "body": { "mode": "raw", "raw": "{\n  \"email\": \"{{ownerEmail}}\",\n  \"password\": \"{{ownerPassword}}\"\n}" }
+          }
+        },
+        {
+          "name": "Login Employee",
+          "event": [{ "listen": "test", "script": { "exec": [
+            "const res = pm.response.json();",
+            "if (res.token) { pm.collectionVariables.set('employeeToken', res.token); }"
+          ]}}],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{usersBaseUrl}}/api/v1/auth/login",
+            "body": { "mode": "raw", "raw": "{\n  \"email\": \"{{employeeEmail}}\",\n  \"password\": \"{{employeePassword}}\"\n}" }
+          }
+        },
+        {
+          "name": "Login Client",
+          "event": [{ "listen": "test", "script": { "exec": [
+            "const res = pm.response.json();",
+            "if (res.token) { pm.collectionVariables.set('clientToken', res.token); }"
+          ]}}],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{usersBaseUrl}}/api/v1/auth/login",
+            "body": { "mode": "raw", "raw": "{\n  \"email\": \"{{clientEmail}}\",\n  \"password\": \"{{clientPassword}}\"\n}" }
+          }
+        }
+      ]
+    },
+    {
+      "name": "2. Users - Accounts",
+      "item": [
+        {
+          "name": "Create Owner (Admin only)",
+          "event": [{ "listen": "test", "script": { "exec": [
+            "const res = pm.response.json();",
+            "if (res.id) { pm.collectionVariables.set('ownerId', res.id); }"
+          ]}}],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+            ],
+            "url": "{{usersBaseUrl}}/api/v1/owner/",
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"Juan\",\n  \"lastName\": \"Perez\",\n  \"cc\": \"1000000001\",\n  \"phone\": \"+573001111111\",\n  \"birthDate\": \"1990-01-01\",\n  \"email\": \"owner@example.com\",\n  \"password\": \"clave123\"\n}" }
+          }
+        },
+        {
+          "name": "Create Employee (Owner only)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{ownerToken}}" }
+            ],
+            "url": "{{usersBaseUrl}}/api/v1/employee/",
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"Ana\",\n  \"lastName\": \"Gomez\",\n  \"cc\": \"1000000002\",\n  \"phone\": \"+573002222222\",\n  \"email\": \"employee@example.com\",\n  \"password\": \"clave123\"\n}" }
+          }
+        },
+        {
+          "name": "Create Client",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{usersBaseUrl}}/api/v1/client/",
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"Carlos\",\n  \"lastName\": \"Ruiz\",\n  \"cc\": \"1000000003\",\n  \"phone\": \"+573043528171\",\n  \"email\": \"client@example.com\",\n  \"password\": \"clave123\"\n}" }
+          }
+        }
+      ]
+    },
+    {
+      "name": "3. Mall - Restaurant & Plates",
+      "item": [
+        {
+          "name": "Create Restaurant (Admin only)",
+          "event": [{ "listen": "test", "script": { "exec": [
+            "const res = pm.response.json();",
+            "if (res.id) { pm.collectionVariables.set('restaurantId', res.id); }"
+          ]}}],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+            ],
+            "url": "{{mallBaseUrl}}/api/v1/restaurant/",
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"El Buen Sabor\",\n  \"nit\": \"900123456\",\n  \"address\": \"Calle 10 #5-20\",\n  \"phone\": \"+573003333333\",\n  \"logoUrl\": \"https://example.com/logo.png\",\n  \"ownerId\": {{ownerId}}\n}" }
+          }
+        },
+        {
+          "name": "List Restaurants",
+          "request": {
+            "method": "GET",
+            "url": "{{mallBaseUrl}}/api/v1/restaurant/?page=0&size=10"
+          }
+        },
+        {
+          "name": "Create Plate (Owner only)",
+          "event": [{ "listen": "test", "script": { "exec": [
+            "const res = pm.response.json();",
+            "if (res.id) { pm.collectionVariables.set('plateId', res.id); }"
+          ]}}],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{ownerToken}}" }
+            ],
+            "url": "{{mallBaseUrl}}/api/v1/plate/",
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"Bandeja Paisa\",\n  \"price\": 25000,\n  \"description\": \"Plato tipico\",\n  \"url\": \"https://example.com/plate.png\",\n  \"category\": \"Almuerzo\",\n  \"restaurantId\": {{restaurantId}}\n}" }
+          }
+        },
+        {
+          "name": "List Plates by Restaurant",
+          "request": {
+            "method": "GET",
+            "url": "{{mallBaseUrl}}/api/v1/plate/?restaurantId={{restaurantId}}&page=0&size=10"
+          }
+        }
+      ]
+    },
+    {
+      "name": "4. Mall - Order lifecycle",
+      "item": [
+        {
+          "name": "Create Order (Client)",
+          "event": [{ "listen": "test", "script": { "exec": [
+            "const res = pm.response.json();",
+            "if (res.id) { pm.collectionVariables.set('orderId', res.id); }"
+          ]}}],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{clientToken}}" }
+            ],
+            "url": "{{mallBaseUrl}}/api/v1/order/",
+            "body": { "mode": "raw", "raw": "{\n  \"restaurantId\": {{restaurantId}},\n  \"items\": [\n    { \"plateId\": {{plateId}}, \"quantity\": 2 }\n  ]\n}" }
+          }
+        },
+        {
+          "name": "List Orders (Employee, filter PENDIENTE)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{employeeToken}}" }],
+            "url": "{{mallBaseUrl}}/api/v1/order/?status=PENDIENTE&page=0&size=10"
+          }
+        },
+        {
+          "name": "Assign Order (Employee)",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Authorization", "value": "Bearer {{employeeToken}}" }],
+            "url": "{{mallBaseUrl}}/api/v1/order/{{orderId}}/assign"
+          }
+        },
+        {
+          "name": "Mark Order Ready (Employee) - triggers SMS",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Authorization", "value": "Bearer {{employeeToken}}" }],
+            "url": "{{mallBaseUrl}}/api/v1/order/{{orderId}}/ready"
+          }
+        },
+        {
+          "name": "Deliver Order (Employee, needs securityPin)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{employeeToken}}" }
+            ],
+            "url": "{{mallBaseUrl}}/api/v1/order/{{orderId}}/deliver",
+            "body": { "mode": "raw", "raw": "{\n  \"securityPin\": \"{{securityPin}}\"\n}" }
+          }
+        },
+        {
+          "name": "Cancel Order (Client, only if PENDIENTE)",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Authorization", "value": "Bearer {{clientToken}}" }],
+            "url": "{{mallBaseUrl}}/api/v1/order/{{orderId}}/cancel"
+          }
+        }
+      ]
+    },
+    {
+      "name": "5. Mall - Efficiency (Owner)",
+      "item": [
+        {
+          "name": "Get Efficiency Report",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{ownerToken}}" }],
+            "url": "{{mallBaseUrl}}/api/v1/order/efficiency?restaurantId={{restaurantId}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "6. Traceability (Client)",
+      "item": [
+        {
+          "name": "Get Order Traceability",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{clientToken}}" }],
+            "url": "{{traceabilityBaseUrl}}/api/v1/traceability/order/{{orderId}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "7. Messaging (internal, direct test)",
+      "item": [
+        {
+          "name": "Send SMS directly",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{messagingBaseUrl}}/api/v1/notification/sms",
+            "body": { "mode": "raw", "raw": "{\n  \"phone\": \"+573043528171\",\n  \"message\": \"Prueba de mensajeria\"\n}" }
+          }
+        }
+      ]
+    }
+  ]
+}
